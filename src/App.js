@@ -133,12 +133,11 @@ function App() {
   }
 
 
+  console.log("mapData1 잘오는지 : " + mapData1);
 
   // call the park json
-  // var parkjson = JSON.parse(JSON.stringify(mapData1));
-  console.log("mapData1 parkjson : " + parkjson);
+  //var parkjson = JSON.parse(JSON.stringify(mapData1));
   var units = mapData1.DATA;
-  console.log("mapData1 units : " + units);
   var parks = [];
   var circle;
 

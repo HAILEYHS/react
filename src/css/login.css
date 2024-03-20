@@ -1,0 +1,13 @@
+/* login css*/
+
+#login_container{
+	margin-top: 200px;
+	text-align: center;
+}
+#logo {
+	color: rgb(19, 132, 9);
+}
+
+h1 {
+	color: rgb(108, 117, 125);
+}

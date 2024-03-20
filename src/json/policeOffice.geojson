@@ -1,5 +1,4 @@
-﻿{
-  "mapData2": {
+﻿mapData2={
     "type": "FeatureCollection",
     "features": [
       {
@@ -82161,4 +82160,3 @@
       }
     ]
   }
-}
