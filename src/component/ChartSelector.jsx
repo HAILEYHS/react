@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../css/borough.css';
-// import ChartSecufacil from './ChartSecufacil'; // 차트 컴포넌트를 import합니다.
 
 function ChartSelector(guNameValue) {
     console.log(guNameValue.guNameValue);
@@ -13,7 +12,7 @@ function ChartSelector(guNameValue) {
     const fetchDataAndProcess = async (guNameValue) => {
         try {
             // 요청 URL을 동적으로 생성
-            const url = "http://localhost:8181/newseekers/borough/getPopulation?guNameValue=" + guNameValue.guNameValue;
+            const url = "/newseekers/borough/getPopulation?guNameValue=" + guNameValue.guNameValue;
 
             const response = await fetch(url);
             if (!response.ok) {

@@ -20,7 +20,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'NPSfontBold';
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 /* gu_rank */
@@ -93,7 +93,7 @@
 }
 
 #screen1_chartBox {
-    width: 90%;
+    width: 80%;
     margin: 0 auto;
 }
 

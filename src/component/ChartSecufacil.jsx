@@ -4,14 +4,14 @@ import '../css/borough.css';
 
 function ChartSecufacil({ guNameValue }) {
     const [chartData, setChartData] = useState(null);
-    // const [charts, setCharts] = useState({
-    //     chart1: null,
-    //     chart2: null,
-    //     chart3: null
-    // });
+    const [charts, setCharts] = useState({
+        chart1: null,
+        chart2: null,
+        chart3: null
+    });
 
     useEffect(() => {
-        // fetchData('getChartData', guNameValue);
+        fetchData(guNameValue);
     }, [guNameValue]);
 
     useEffect(() => {
@@ -20,28 +20,37 @@ function ChartSecufacil({ guNameValue }) {
         }
     }, [chartData]);
 
-    // const fetchData = (url, guNameValue) => {
-    //     fetch(url + '?guNameValue=' + guNameValue.guNameValue)
-    //         .then(response => {
-    //             if (!response.ok) {
-    //                 throw new Error('Network response was not ok' + response.statusText);
-    //             }
-    //             return response.json();
-    //         })
-    //         .then(data => {
-    //             setChartData(data);
-    //         })
-    //         .catch(error => {
-    //             console.error("Fetch error: " + error);
-    //         });
+    const fetchData = (guNameValue) => {
+        fetch('/newseekers/borough/getSecufacil?guNameValue=' + guNameValue)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setChartData(data);
+            })
+            .catch(error => {
+                console.error("Fetch error: " + error);
+            });
 
-    // };
+    };
 
     const drawCharts = (data) => {
         const ctx1 = document.getElementById('myChart1')?.getContext('2d');
         const ctx2 = document.getElementById('myChart2')?.getContext('2d');
         const ctx3 = document.getElementById('myChart3')?.getContext('2d');
-
+        // 이전 차트 파괴
+        if (charts.chart1) {
+            charts.chart1.destroy();
+        }
+        if (charts.chart2) {
+            charts.chart2.destroy();
+        }
+        if (charts.chart3) {
+            charts.chart3.destroy();
+        }
         if (ctx1 && ctx2 && ctx3) {
             const newChart1 = new Chart(ctx1, {
                 type: 'bar',
@@ -103,11 +112,11 @@ function ChartSecufacil({ guNameValue }) {
                 }
             });
 
-            // setCharts({
-            //     chart1: newChart1,
-            //     chart2: newChart2,
-            //     chart3: newChart3
-            // });
+            setCharts({
+                chart1: newChart1,
+                chart2: newChart2,
+                chart3: newChart3
+            });
         }
     };
 
