@@ -1,18 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import '../css/borough.css';
-import ChartSelector from './ChartSelector'; // 차트 컴포넌트를 import합니다.
+import ChartSelector from './ChartSelector';
 import ChartSecufacil from './ChartSecufacil';
 import ChartPerceivedSafety from './ChartPerceivedSafety';
 
 function ChartComponent() {
     const guList = ['강남구', '송파구', '영등포구', '성동구', '노원구', '강북구'];
     const [guNameValue, setGuNameValue] = useState('강남구');
+    const [chartSelectorData, setChartSelectorData] = useState(null);
+    const [chartSecufacil, setChartSecufacil] = useState(null);
 
     const handleSelectChange = (event) => {
-        console.log(guNameValue)
-        console.log(event.target.value)
         setGuNameValue(event.target.value);
     };
+
+    useEffect(() => {
+        if (guNameValue) {
+            fetchDataAndProcess('/newseekers/borough/getPopulation?guNameValue=', guNameValue, populationData);
+        }
+    }, [guNameValue]);
+
+    const fetchDataAndProcess = (url, guNameValue, callback) => {
+        console.log('Fetching data from: ', url + guNameValue);
+        try {
+            fetch(url + guNameValue)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data =>
+                    callback(data)
+                )
+                .catch(error => console.error("Fetch error: " + error));
+        } catch (error) {
+            console.error("Fetch error: " + error);
+        }
+    };
+
+    function populationData(data) {
+        if (data !== undefined) {
+            setChartSelectorData(data);
+        }
+    }
+
+    function secufacilData(data) {
+        if (data !== undefined) {
+            setChartSecufacil(data);
+        }
+    }
 
     return (
         <>
@@ -31,7 +68,7 @@ function ChartComponent() {
                                     ))}
                                 </select>
                             </div>
-                            <ChartSelector guNameValue={guNameValue} />
+                            <ChartSelector chartSelectorData={chartSelectorData} />
                         </div>
                     </div >
 
@@ -44,6 +81,7 @@ function ChartComponent() {
             </div >
             <ChartSecufacil guNameValue={guNameValue} />
             <ChartPerceivedSafety guNameValue={guNameValue} />
+
         </>
     );
 };

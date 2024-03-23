@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Chart from 'chart.js/auto';
 import '../css/borough.css';
 
 function ChartSecufacil({ guNameValue }) {
+
     const [chartData, setChartData] = useState(null);
     const [charts, setCharts] = useState({
         chart1: null,
