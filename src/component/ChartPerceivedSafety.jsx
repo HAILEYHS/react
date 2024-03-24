@@ -12,12 +12,6 @@ function ChartPerceivedSafety({ guNameValue }) {
         document.querySelectorAll('.btn').forEach(button => {
             button.addEventListener('click', handleClick);
         });
-
-        return () => {
-            document.querySelectorAll('.btn').forEach(button => {
-                button.removeEventListener('click', handleClick);
-            });
-        };
     }, [guNameValue]);
 
     useEffect(() => {
@@ -60,6 +54,7 @@ function ChartPerceivedSafety({ guNameValue }) {
                 return response.json();
             })
             .then(data => {
+                console.log(data);
                 document.getElementById("chart_resultMent3").innerHTML = `<p>${year}년도 ${data}위</p>`;
             })
             .catch(error => {

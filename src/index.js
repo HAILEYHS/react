@@ -12,7 +12,7 @@ root.render(
   <React.StrictMode>
     <Navbar />
     <ChartComponent />
-    {/* <Footer /> */}
+    <Footer />
   </React.StrictMode>
 );
 

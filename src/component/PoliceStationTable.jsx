@@ -1,7 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const PoliceStationTable = ({ guNAmeValue }) => {
-    
+const PoliceStationTable = ({ guNameValue }) => {
+    console.log(guNameValue);
+    const [policeStations, setPoliceStationsData] = useState(null);
+
+    useEffect(() => {
+        fetchData(guNameValue);
+    }, [guNameValue]);
+
+    const fetchData = (guNameValue) => {
+        fetch('/newseekers/borough/getPoliceStations?guNameValue=' + guNameValue)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setPoliceStationsData(data);
+            })
+            .catch(error => {
+                console.error("Fetch error: " + error);
+            });
+
+    };
 
     return (
         <div id="policeStationBox" className="container-fluid">
@@ -20,12 +42,12 @@ const PoliceStationTable = ({ guNAmeValue }) => {
                     </tr>
                 </thead>
                 <tbody id="policeStationData">
-                    {data.length === 0 ? (
+                    {policeStations === null ? (
                         <tr>
-                            <td colSpan="5">데이터가 없습니다.</td>
+                            <td colSpan="5">데이터를 로딩 중입니다.</td>
                         </tr>
                     ) : (
-                        data.map(item => (
+                        policeStations.map(item => (
                             <tr key={item.id}>
                                 <td>{item.district}</td>
                                 <td>{item.sub_district}</td>

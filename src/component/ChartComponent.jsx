@@ -3,12 +3,12 @@ import '../css/borough.css';
 import ChartSelector from './ChartSelector';
 import ChartSecufacil from './ChartSecufacil';
 import ChartPerceivedSafety from './ChartPerceivedSafety';
+import PoliceStationTable from './PoliceStationTable';
 
 function ChartComponent() {
-    const guList = ['강남구', '송파구', '영등포구', '성동구', '노원구', '강북구'];
+    const guList = ['송파구', '영등포구', '성동구', '노원구', '강북구'];
     const [guNameValue, setGuNameValue] = useState('강남구');
     const [chartSelectorData, setChartSelectorData] = useState(null);
-    const [chartSecufacil, setChartSecufacil] = useState(null);
 
     const handleSelectChange = (event) => {
         setGuNameValue(event.target.value);
@@ -17,6 +17,7 @@ function ChartComponent() {
     useEffect(() => {
         if (guNameValue) {
             fetchDataAndProcess('/newseekers/borough/getPopulation?guNameValue=', guNameValue, populationData);
+
         }
     }, [guNameValue]);
 
@@ -42,12 +43,6 @@ function ChartComponent() {
     function populationData(data) {
         if (data !== undefined) {
             setChartSelectorData(data);
-        }
-    }
-
-    function secufacilData(data) {
-        if (data !== undefined) {
-            setChartSecufacil(data);
         }
     }
 
@@ -81,6 +76,7 @@ function ChartComponent() {
             </div >
             <ChartSecufacil guNameValue={guNameValue} />
             <ChartPerceivedSafety guNameValue={guNameValue} />
+            <PoliceStationTable guNameValue={guNameValue} />
 
         </>
     );
