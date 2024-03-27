@@ -1,0 +1,34 @@
+/* 할 일 아이템 박스 */
+.todoItem {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.todoItem .checkBox_col {
+    width: 20px;
+}
+
+.todoItem .title_col {
+    /* flex: 해당 요소의 너비가 브라우저의 크기에 따라 유연하게 조절 */
+    flex: 1;
+}
+
+.todoItem .date_col {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.todoItem .btn_col button {
+    font-size: 0.8rem;
+    border:1px solid #d2d2d2;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.todoItem .btn_col button:hover {
+    cursor: pointer;
+    background-color: #cfcfcf;
+}
