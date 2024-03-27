@@ -1,0 +1,31 @@
+.todoEditor .editor_wrapper {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+.todoEditor input {
+    height: 40px;
+    /* flex: 해당 요소의 너비가 브라우저의 크기에 따라 유연하게 조절 */
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px dashed rgb(205, 205, 205);
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+.todoEditor input:focus {
+    outline: none;
+    border: 1px solid #1f93ff;
+}
+
+.todoEditor button {
+    /* cusor: 버튼에 마우스를 가져가면 커서가 손모양으로 바뀜 */
+    cursor: pointer;
+    width: 80px;
+    border: none;
+    background-color: #1f93ff;
+    color: white;
+    border-radius: 5px;
+}
