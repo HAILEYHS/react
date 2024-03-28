@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useRef } from 'react';
+import React, { useReducer, useRef } from 'react';
 import Header from './component/Header';
 import TodoEditor from './component/TodoEditor';
 import TodoList from './component/TodoList';
@@ -9,7 +9,7 @@ import TodoList from './component/TodoList';
 const mockTodo = [
   {
     id: 0,
-    isDone: false,
+    isDone: true,
     content: "React 공부하기",
     createdDate: new Date().getTime(),
   }, {
@@ -26,10 +26,31 @@ const mockTodo = [
   },
 ];
 
+//상태변화 코드. 반환 값이 state값.
+function reducer(state, action) {
+  switch (action.type) {
+    case "CREATE": {
+      return [action.newItem, ...state];
+    }
+    case "UPDATE": {
+      return state.map((it) =>
+        it.id === action.targetId ? { ...it, isDone: !it.isDone } : it
+      );
+    }
+
+    case "DELETE": {
+      return state.filter((it) => it.id !== action.targetId);
+    }
+
+    default:
+      return state;
+  }
+};
+
 function App() {
 
   //할일 목록 저장
-  const [todo, setTodo] = useState(mockTodo);
+  const [todo, dispatch] = useReducer(reducer, mockTodo);
 
   // 새로운 참조를 생성
   const idRef = useRef(3);
@@ -37,16 +58,33 @@ function App() {
   //할일 추가 버튼 누르면 호출.
   //content인자를 받아 새로운 객체 생성, todo 상태에 추가.
   const onCreate = (content) => {
-    const newItem = {
-      id: idRef.current,
-      content,
-      isDone: false,
-      createdDate: new Date().getTime(),
-    };
-    setTodo([newItem, ...todo]);
-    //id의 현재값을 1 늘림. 모든 id는 고유의 값.
+    dispatch({
+      type: "CREATE",
+      newItem: {
+        id: idRef.current,
+        content,
+        isDone: false,
+        createdDate: new Date().getTime(),
+      },
+    })
     idRef.current += 1;
-  }
+  };
+
+  //체크박스에 틱이 발생했을때 실행되는 함수
+  //받아온 id값과 비교하여 isDone 속성 반전.
+  const onUpdate = (targetId) => {
+    dispatch({
+      type: "UPDATE",
+      targetId,
+    })
+  };
+
+  const onDelete = (targetId) => {
+    dispatch({
+      type: "DELETE",
+      targetId,
+    })
+  };
 
   return (
     <div className="App">
@@ -54,8 +92,8 @@ function App() {
 
       {/* 할일 생성을 위해 onCreate함수를 전달 */}
       <TodoEditor onCreate={onCreate} />
-      
-      <TodoList />
+
+      <TodoList todo={todo} onUpdate={onUpdate} onDelete={onDelete} />
     </div>
   );
 }
