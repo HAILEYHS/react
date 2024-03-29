@@ -22,7 +22,7 @@ const TodoList = ({ todo, onUpdate, onDelete }) => {
         const notDoneCount = totalCount - doneCount;
 
         return { totalCount, doneCount, notDoneCount };
-    },[todo]);
+    }, [todo]);
 
     const { totalCount, doneCount, notDoneCount } = analyzeTodo;
 
