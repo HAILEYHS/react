@@ -1,8 +1,8 @@
 import './App.css';
 import React, { useReducer, useRef } from 'react';
-import Header from './component/Header';
-import TodoEditor from './component/TodoEditor';
-import TodoList from './component/TodoList';
+import Header from './component/Header.jsx';
+import TodoEditor from './component/TodoEditor.jsx';
+import TodoList from './component/TodoList.jsx';
 
 
 //초기 할일 목록 정의
