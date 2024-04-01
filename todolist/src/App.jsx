@@ -1,9 +1,10 @@
 import './App.css';
-import React, { useReducer, useRef } from 'react';
+import React, { useCallback, useReducer, useRef } from 'react';
 import Header from './component/Header.jsx';
 import TodoEditor from './component/TodoEditor.jsx';
 import TodoList from './component/TodoList.jsx';
 
+export const TodoContext = React.createContext();
 
 //초기 할일 목록 정의
 const mockTodo = [
@@ -72,28 +73,27 @@ function App() {
 
   //체크박스에 틱이 발생했을때 실행되는 함수
   //받아온 id값과 비교하여 isDone 속성 반전.
-  const onUpdate = (targetId) => {
+  const onUpdate = useCallback((targetId) => {
     dispatch({
       type: "UPDATE",
       targetId,
     })
-  };
+  }, []);
 
-  const onDelete = (targetId) => {
+  const onDelete = useCallback((targetId) => {
     dispatch({
       type: "DELETE",
       targetId,
     })
-  };
+  }, []);
 
   return (
     <div className="App">
       <Header />
-
-      {/* 할일 생성을 위해 onCreate함수를 전달 */}
-      <TodoEditor onCreate={onCreate} />
-
-      <TodoList todo={todo} onUpdate={onUpdate} onDelete={onDelete} />
+      <TodoContext.Provider value={{ todo, onCreate, onUpdate, onDelete }}>
+        <TodoEditor />
+        <TodoList />
+      </TodoContext.Provider>
     </div>
   );
 }
