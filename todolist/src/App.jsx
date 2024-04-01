@@ -1,10 +1,11 @@
 import './App.css';
-import React, { useCallback, useReducer, useRef } from 'react';
+import React, { useMemo, useCallback, useReducer, useRef } from 'react';
 import Header from './component/Header.jsx';
 import TodoEditor from './component/TodoEditor.jsx';
 import TodoList from './component/TodoList.jsx';
 
-export const TodoContext = React.createContext();
+export const TodoStateContext = React.createContext();
+export const TodoDispatchContext = React.createContext();
 
 //초기 할일 목록 정의
 const mockTodo = [
@@ -87,13 +88,19 @@ function App() {
     })
   }, []);
 
+  const memoizedDispatches = useMemo(() => {
+    return { onCreate, onUpdate, onDelete }
+  }, []);
+
   return (
     <div className="App">
       <Header />
-      <TodoContext.Provider value={{ todo, onCreate, onUpdate, onDelete }}>
-        <TodoEditor />
-        <TodoList />
-      </TodoContext.Provider>
+      <TodoStateContext.Provider value={{ todo }}>
+        <TodoDispatchContext.Provider value={memoizedDispatches}>
+          <TodoEditor />
+          <TodoList />
+        </TodoDispatchContext.Provider>
+      </TodoStateContext.Provider>
     </div>
   );
 }
