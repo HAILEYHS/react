@@ -1,6 +1,11 @@
+import React, { useContext } from 'react';
 import '../css/TodoItem.css';
+import { TodoContext } from '../App';
 
-const TodoItem = ({ id, isDone, content, createdDate, onUpdate, onDelete }) => {
+const TodoItem = ({ id, isDone, content, createdDate }) => {
+    const { onUpdate, onDelete } = useContext(TodoContext);
+    console.log(`${id} TodoItem 업데이트`);
+
     const onChangeCheckBox = () => {
         // 현재 틱이 발생한 할일 아이템의 id값을 전달 
         onUpdate(id);
@@ -23,4 +28,4 @@ const TodoItem = ({ id, isDone, content, createdDate, onUpdate, onDelete }) => {
         </div>
     );
 };
-export default TodoItem;
+export default React.memo(TodoItem);

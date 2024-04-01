@@ -1,8 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
+import { TodoContext } from '../App.jsx';
 import '../css/TodoList.css';
 import TodoItem from './TodoItem';
 
-const TodoList = ({ todo, onUpdate, onDelete }) => {
+const TodoList = () => {
+    const { todo } = useContext(TodoContext);
     const [search, setSearch] = useState("");
 
     const onChangeSearch = (e) => {
@@ -42,12 +44,18 @@ const TodoList = ({ todo, onUpdate, onDelete }) => {
                 ))} */}
                 {getSearchResult().map((it) => (
                     // 요소의 id값을 key로 구분
-                    <TodoItem key={it.id}{...it} onUpdate={onUpdate} onDelete={onDelete} />
+                    <TodoItem key={it.id}{...it} />
                 ))}
 
             </div>
         </div>
 
     );
+};
+
+//Context.provider를 적용하면서 props로 todo를 받아오지 못할때 
+//에러가 나지 않도록 빈 배열 설정
+TodoList.defaultProps = {
+    todo: [],
 };
 export default TodoList;
