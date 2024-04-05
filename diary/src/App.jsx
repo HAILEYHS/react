@@ -13,6 +13,7 @@ function App() {
         <Route path="/write" element={<Write />} />
         <Route path="/diary" element={<Diary />} />
         <Route path="/edite" element={<Edite />} />
+
       </Routes>
     </div>
   );
