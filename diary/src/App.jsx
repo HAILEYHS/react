@@ -14,19 +14,19 @@ const mockData = [
     id: "mock1",
     date: new Date().getTime(),
     content: "mock1",
-    emotion: 1,
+    emotionId: 1,
   },
   {
     id: "mock2",
     date: new Date().getTime(),
     content: "mock2",
-    emotion: 2,
+    emotionId: 2,
   },
   {
     id: "mock3",
     date: new Date().getTime(),
     content: "mock3",
-    emotion: 3,
+    emotionId: 3,
   },
 ];
 function reducer(state, action) {
