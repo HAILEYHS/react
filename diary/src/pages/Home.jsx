@@ -4,6 +4,7 @@ import { getMonthRangeByDate } from "../util.js";
 import Button from "../component/Button";
 import Editor from "../component/Editor";
 import Header from "../component/Header";
+import DiaryList from "../component/DiaryList.jsx";
 
 const Home = () => {
     // DiaryStateContext에서 diary 데이터 불러옴.
@@ -41,6 +42,7 @@ const Home = () => {
                 leftChild={<Button text={"<"} onClick={onDecreaseMonth} />}
                 rightChild={<Button text={">"} onClick={onIncreaseMonth} />}
             />
+            <DiaryList data={filteredData} />
             <h3>Home 페이지입니다.</h3>
         </div>
     );
