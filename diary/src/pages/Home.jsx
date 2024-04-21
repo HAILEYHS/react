@@ -43,7 +43,7 @@ const Home = () => {
                 rightChild={<Button text={">"} onClick={onIncreaseMonth} />}
             />
             <DiaryList data={filteredData} />
-            <h3>Home 페이지입니다.</h3>
+            
         </div>
     );
 }
