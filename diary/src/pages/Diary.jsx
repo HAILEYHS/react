@@ -3,17 +3,18 @@ import useDiary from "../hooks/useDiary";
 import Button from "../component/Button";
 import Header from "../component/Header";
 import { getFormattedDate } from "../util";
+import Viewer from "../component/Viewer";
 
 const Diary = () => {
     const { id } = useParams();
     const data = useDiary(id);
     const navigate = useNavigate();
-    
+
     const goBack = () => {
         navigate(-1);
     };
     const goEdit = () => {
-        navigate(`/edit/${id}`);    
+        navigate(`/edit/${id}`);
     };
 
     if (!data) {
@@ -24,9 +25,10 @@ const Diary = () => {
         return (
             <div>
                 <Header title={title}
-                    leftChild={<Button text={"< 뒤로가기"} onClick={goBack}/>}
-                    rightChild={<Button text={"수정하기"} onClick={goEdit}/>}
+                    leftChild={<Button text={"< 뒤로가기"} onClick={goBack} />}
+                    rightChild={<Button text={"수정하기"} onClick={goEdit} />}
                 />
+                <Viewer content={content} emotionId={emotionId} />
                 <div>{id}번 일기</div>
                 <div>Diary 페이지입니다.</div>
             </div>
