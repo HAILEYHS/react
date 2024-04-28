@@ -1,1 +1,43 @@
+/* *{border: 1px solid black;} */
 .viewer{}
+.viewer section{
+    width: 100%;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.viewer h4{
+    font-size: 22px;
+}
+.viewer .emotion_img_wrapper{
+    background-color: #ececec;
+    width: 250px;
+    height: 250px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: space-around;
+}
+.viewer .emotion_img_wrapper_1{
+    background-color: #64c964;
+}
+.viewer .emotion_img_wrapper_2{
+    background-color: #9dd772;
+}
+.viewer .emotion_img_wrapper_3{
+    background-color: #fdce17;
+}
+.viewer .emotion_img_wrapper_4{
+    background-color: #fd8446;
+}
+.viewer .emotion_img_wrapper_5{
+    background-color: #fd565f;
+}
+.viewer .emotion_descript{
+    font-size: 20px;
+    color: white;
+    margin-top: 40px;
+}
