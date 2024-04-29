@@ -29,8 +29,6 @@ const Diary = () => {
                     rightChild={<Button text={"수정하기"} onClick={goEdit} />}
                 />
                 <Viewer content={content} emotionId={emotionId} />
-                <div>{id}번 일기</div>
-                <div>Diary 페이지입니다.</div>
             </div>
         );
     }
