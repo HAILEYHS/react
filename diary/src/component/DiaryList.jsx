@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './DiaryList.css';
-import Button from './Button';
-import DiaryItem from './DiaryItem';
+import Button from './Button.jsx';
+import DiaryItem from './DiaryItem.jsx';
 
 const sortOptionList = [
     { value: "latest", name: "최신순" },
