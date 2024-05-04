@@ -1,9 +1,9 @@
 import { useParams, useNavigate } from "react-router-dom";
-import useDiary from "../hooks/useDiary";
-import Button from "../component/Button";
-import Header from "../component/Header";
+import useDiary from "../hooks/useDiary.js";
+import Button from "../component/Button.jsx";
+import Header from "../component/Header.jsx";
 import { getFormattedDate } from "../util";
-import Viewer from "../component/Viewer";
+import Viewer from "../component/Viewer.jsx";
 
 const Diary = () => {
     const { id } = useParams();
