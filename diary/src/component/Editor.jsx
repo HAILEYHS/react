@@ -44,13 +44,7 @@ const Editor = ({ initData, onSubmit }) => {
     const handleOnGoBack = () => {
         navigate(-1);
     };
-    const hadleChangeEmotion = (emotionId) => {
-        setState({
-            ...state,
-            emotionId,
-        })
-    }
-
+    
     const handleChangeEmotion = useCallback((emotionId) => {
         setState((state)=>({
             ...state,
@@ -73,7 +67,7 @@ const Editor = ({ initData, onSubmit }) => {
                         <EmotionItem
                             key={it.id}
                             {...it}
-                            onClick={hadleChangeEmotion}
+                            onClick={handleChangeEmotion}
                             isSelected={state.emotionId === it.id}
                         />
                     ))}
