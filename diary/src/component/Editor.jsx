@@ -21,7 +21,7 @@ const Editor = ({ initData, onSubmit }) => {
                 date: getFormattedDate(new Date(parseInt(initData.date))),
             });
         }
-    }, initData);
+    }, [initData]);
 
     const handleChangeDate = (e) => {
         setState({
@@ -44,13 +44,14 @@ const Editor = ({ initData, onSubmit }) => {
     const handleOnGoBack = () => {
         navigate(-1);
     };
-    
+
     const handleChangeEmotion = useCallback((emotionId) => {
-        setState((state)=>({
+        setState((state) => ({
             ...state,
             emotionId,
         }));
     }, []);
+
     return (
         <div className="Editor">
             <div className="editor_section">

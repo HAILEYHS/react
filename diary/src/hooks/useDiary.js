@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { DiaryStateContext } from "../App";
+import { DiaryStateContext } from "../App.jsx";
 import { useNavigate } from "react-router-dom";
 
 // 훅이라는 것을 명시하기 위해 'use'접두사를 붙임.
