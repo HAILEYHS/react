@@ -9,26 +9,6 @@ import Edit from "./pages/Edit.jsx";
 export const DiaryStateContext = React.createContext();
 export const DiaryDispathContext = React.createContext();
 
-const mockData = [
-  {
-    id: "mock1",
-    date: new Date().getTime() - 1,
-    content: "mock1",
-    emotionId: 1,
-  },
-  {
-    id: "mock2",
-    date: new Date().getTime() - 2,
-    content: "mock2",
-    emotionId: 2,
-  },
-  {
-    id: "mock3",
-    date: new Date().getTime() - 3,
-    content: "mock3",
-    emotionId: 3,
-  },
-];
 function reducer(state, action) {
   switch (action.type) {
     case "CREATE": {
@@ -65,10 +45,24 @@ function App() {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch({
-      type: "INIT",
-      data: mockData,
-    });
+    const rawData = localStorage.getItem("diary");
+    if (!rawData) {
+      setIsDataLoaded(true);
+      return;
+    }
+    const localData = JSON.parse(rawData);
+
+    if (localData.length === 0) {
+      // JSON.parse로 복구한 일기 데이터의 길이가 0이면, 변수 isDataLoaded를 true로 변경하고 콜백 함수 종료.
+      setIsDataLoaded(true);
+      return;
+    }
+    // 불러온 일기 데이터를 id를 기준으로 내림차순으로 정렬.
+    localData.sort((a, b) => Number(b.id) - Number(a.id));
+    idRef.current = localData[0].id + 1;
+
+    // 불러온 일기 데이터로 일기 State를 초기화.
+    dispatch({ type: "INIT", data: localData });
     setIsDataLoaded(true);
   }, []);
 
